@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="transition-colors duration-300">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To-do List</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white min-h-screen">
+
+  <!-- Navbar -->
+  <header class="bg-white dark:bg-gray-800 shadow p-4 flex justify-between items-center">
+    <h1 class="font-bold text-xl">To-do-List</h1>
+    <div class="flex items-center gap-2">
+      <input type="text" placeholder="Pesquisar" class="px-4 py-1 rounded bg-gray-100 dark:bg-gray-700 focus:outline-none" />
+      <button id="toggleDark" class="text-xl">🌙</button>
+    </div>
+  </header>
+
+  <!-- Conteúdo -->
+  <main class="p-8">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-2xl font-bold">Tarefas</h2>
+      <button id="openModal" class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 dark:bg-white dark:text-black">
+        ➕ NOVA TAREFA
+      </button>
+    </div>
+
+    <!-- Cards de tarefas -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <!-- Exemplo de card -->
+      <div class="bg-white dark:bg-gray-800 p-4 rounded shadow">
+        <h3 class="font-bold">Título da tarefa</h3>
+        <p class="text-sm text-gray-500 dark:text-gray-400">Lorem ipsum dolor sit amet consectetur. Sed et urna mi tellus.</p>
+        <div class="flex justify-between items-center mt-4 text-sm text-gray-500 dark:text-gray-400">
+          <span>24/07/2024</span>
+          <div class="flex gap-2">
+            <button title="Editar">✏️</button>
+            <button title="Excluir">🗑️</button>
+          </div>
+        </div>
+      </div>
+      <!-- Repita os cards conforme necessário -->
+    </div>
+  </main>
+
+  <!-- Modal lateral -->
+  <div id="taskModal" class="fixed top-0 right-0 h-full w-full bg-black bg-opacity-60 hidden z-40">
+    <div class="w-full max-w-sm bg-white dark:bg-gray-900 h-full p-6 ml-auto">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-bold">Adicionar</h3>
+        <button id="closeModal" class="text-2xl">✖️</button>
+      </div>
+      <label class="block mb-2">Título</label>
+      <input type="text" class="w-full p-2 rounded border bg-gray-100 dark:bg-gray-800 dark:border-gray-700 mb-4" />
+      <label class="block mb-2">Descrição</label>
+      <textarea class="w-full p-2 rounded border bg-gray-100 dark:bg-gray-800 dark:border-gray-700 mb-4" rows="4"></textarea>
+      <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded w-full">CRIAR</button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    const html = document.documentElement;
+    const toggleDark = document.getElementById('toggleDark');
+    const openModal = document.getElementById('openModal');
+    const closeModal = document.getElementById('closeModal');
+    const taskModal = document.getElementById('taskModal');
+
+    // Alternar modo dark
+    toggleDark.addEventListener('click', () => {
+      html.classList.toggle('dark');
+    });
+
+    // Abrir modal
+    openModal.addEventListener('click', () => {
+      taskModal.classList.remove('hidden');
+    });
+
+    // Fechar modal
+    closeModal.addEventListener('click', () => {
+      taskModal.classList.add('hidden');
+    });
+
+    // Fechar ao clicar fora do modal
+    taskModal.addEventListener('click', (e) => {
+      if (e.target === taskModal) {
+        taskModal.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
