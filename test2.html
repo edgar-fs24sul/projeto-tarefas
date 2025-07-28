@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modal Animado Tailwind</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+  <!-- Botão de abrir -->
+  <button onclick="abrirModal()" class="px-6 py-2 bg-blue-600 text-white rounded">Abrir Modal</button>
+
+  <!-- Overlay + Modal -->
+  <div id="overlay" class="fixed inset-0 bg-black/50 flex items-center justify-center scale-0 transition-transform duration-300 ease-out invisible z-40">
+    <div id="modal" class="bg-white rounded-lg p-6 shadow-lg translate-y-[-50%] opacity-0 transition-all duration-500 ease-out">
+      <h2 class="text-xl font-bold mb-4">Título do Modal</h2>
+      <p class="mb-4">Este é um modal animado usando apenas Tailwind.</p>
+      <button onclick="fecharModal()" class="mt-2 px-4 py-2 bg-red-500 text-white rounded">Fechar</button>
+    </div>
+  </div>
+
+  <script>
+    const overlay = document.getElementById('overlay');
+    const modal = document.getElementById('modal');
+
+    function abrirModal() {
+      overlay.classList.remove('invisible', 'scale-0');
+      setTimeout(() => {
+        overlay.classList.add('scale-100');
+        modal.classList.remove('translate-y-[-50%]', 'opacity-0');
+        modal.classList.add('translate-y-0', 'opacity-100');
+      }, 10);
+    }
+
+    function fecharModal() {
+      overlay.classList.remove('scale-100');
+      modal.classList.add('translate-y-[-50%]', 'opacity-0');
+      modal.classList.remove('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        overlay.classList.add('scale-0', 'invisible');
+      }, 300);
+    }
+  </script>
+
+</body>
+</html>
